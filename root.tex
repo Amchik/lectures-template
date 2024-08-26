@@ -1,0 +1,70 @@
+\documentclass[10pt,a4paper]{report}
+
+\input{packages.tex}
+\input{mathdefs.tex}
+
+\usepackage{fancyhdr}
+\usepackage{mathtools}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[C]{\rightmark}
+\fancyfoot[C]{\thepage}
+
+% Предыдущая глава, с которой всё начинается. Если написать
+% \Chapter{foo}, то это будет уже \startchap+1. Поставьте 0, если
+% вы первак))0)
+\def\startchap{3}
+
+\setlength{\parindent}{1em}
+
+\begin{document}
+	\pagenumbering{gobble}
+	\vspace*{\fill}
+	\begin{center}
+		\fontsize{27pt}{9pt}\selectfont
+		Конспект лекций и практических занятий \\
+		по Математическому Анализу
+	\end{center}
+	\vspace*{\fill}
+	\hfill{}\today
+	\newpage
+	\pagenumbering{arabic}
+	\stepcounter{page}
+	
+	\begin{center}
+		\textbf{\LARGE{}Математический Анализ} \\ \large 2 семестр, весна 2024
+	\end{center}
+	
+	\input{tocdefs.tex}
+	\input{lectures/list.tex}
+
+	%\newpage
+	%\begin{center}
+%		\textbf{\LARGE{}Приложение к математическому анализу} \\ \large Практические занятия
+	%\end{center}
+	
+	%\input{practice/list.tex}
+	
+	\newpage
+	\begin{center}
+		\textbf{\LARGE{}Приложение к математическому анализу} \\ \large {\color{red}Предисловие к шаблону}
+	\end{center}
+	
+	\hypersetup{linkcolor=blue}
+	\input{authorpage.tex}
+	
+	\newpage
+	\input{basicdefs.tex}
+	
+	\input{lectures/list.tex}
+	
+	%\newpage
+	%\phantomsection\label{ax:practice}
+	%\begin{center}
+%		\textbf{\LARGE{}Приложение к математическому анализу} \\ \large Практические занятия
+	%\end{center}
+	
+	%\setcounter{chapter}{0} % NOTE: shitty code
+	%\input{practice/list.tex}
+\end{document}

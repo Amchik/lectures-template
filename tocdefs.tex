@@ -1,0 +1,90 @@
+\newcounter{anything-no} % literally any thing
+\setcounter{anything-no}{0}
+
+\newcounter{parthing-no} % thing in paragraph
+\setcounter{parthing-no}{1}
+
+\newcounter{chapter-no}
+\setcounter{chapter-no}{\startchap}
+\setcounter{chapter}{\startchap}
+\newcommand{\Chapter}[1]{
+	\stepcounter{chapter-no}
+	\noindent\textbf{\large{}Глава \Roman{chapter-no}. #1}
+	%\addcontentsline{toc}{chapter}{#1}
+	\stepcounter{chapter}
+	\setcounter{paragraph-no}{0}
+	\setcounter{parthing-no}{0}
+	\stepcounter{anything-no}
+}
+
+\newcounter{paragraph-no}
+\setcounter{paragraph-no}{1}
+\newcommand{\Paragraph}[1]{\stepcounter{paragraph-no}\setcounter{parthing-no}{0}\stepcounter{anything-no}\noindent\quad\hyperref[any:\arabic{anything-no}]{\textbf{§\arabic{paragraph-no}. #1}}\dotfill\quad\pageref{any:\arabic{anything-no}}}
+
+\NewDocumentEnvironment{defination}{O{}+b}{\stepcounter{parthing-no}\stepcounter{anything-no}\noindent\quad\quad\hyperref[any:\arabic{anything-no}]{\textbf{\arabic{paragraph-no}.\arabic{parthing-no}. }\textit{Определение} #1}\dotfill{\quad\pageref{any:\arabic{anything-no}}}\hfil}{}
+
+\NewDocumentEnvironment{subpar}{m+b}{\stepcounter{parthing-no}\stepcounter{anything-no}\noindent\quad\quad\hyperref[any:\arabic{anything-no}]{\textbf{\arabic{paragraph-no}.\arabic{parthing-no}. }#1}\dotfill{\quad\pageref{any:\arabic{anything-no}}}\hfil}{}
+
+\NewDocumentEnvironment{theorem}{O{}+b}{
+	\stepcounter{parthing-no}
+	\stepcounter{anything-no}
+	\noindent\quad\quad\hyperref[any:\arabic{anything-no}]{\textbf{\arabic{paragraph-no}.\arabic{parthing-no}. }\textit{Теорема} #1}\dotfill{\quad\pageref{any:\arabic{anything-no}}}\hfil
+}{}
+\newenvironment{th-base}{}{}
+\newenvironment{th-proof}[1][]{
+	\ifx&#1&
+	\subsubsection{Доказательство}
+	\else
+	\subsubsection{Доказательство (#1)}
+	\fi
+}{}
+\newenvironment{th-example}[1][]{
+	\ifx&#1&
+	\subsubsection{Пример}
+	\else
+	\subsubsection{Пример (#1)}
+	\fi
+}{}
+\newenvironment{th-props}[1][]{
+	\ifx&#1&
+	\subsubsection{Свойства}
+	\else
+	\subsubsection{Свойство (#1)}
+	\fi
+}{}
+\newenvironment{th-so}[1][]{
+	\ifx&#1&
+	\subsubsection{Следствие}
+	\else
+	\subsubsection{Следствие (#1)}
+	\fi
+}{}
+
+% === PRACTICE ===
+\newcounter{practice-no}
+\newcounter{practice-sect}
+\newcounter{practice-ex}
+
+\setcounter{practice-no}{0}
+\newenvironment{practice}[2][]{
+	\stepcounter{practice-no}
+	\ifx&#1&
+		\noindent\textbf{\large{}Практика \Roman{practice-no}. #2}
+	\else
+		\noindent\textbf{\large{}Практика \Roman{practice-no} (#1). #2}
+	\fi
+	\setcounter{practice-sect}{0}
+	\setcounter{practice-ex}{0}
+	
+	
+}{}
+
+\newcommand{\PracticeSection}[1]{
+	\stepcounter{practice-sect}\noindent\quad\hyperref[prc-sect-\arabic{practice-no}:\arabic{practice-sect}]{\textbf{$\varnothing$\arabic{practice-sect}. #1}}\dotfill\quad\pageref{prc-sect-\arabic{practice-no}:\arabic{practice-sect}}}
+\NewDocumentEnvironment{practice-ex}{m+b}{
+	\stepcounter{practice-ex}
+	\noindent\quad\quad\hyperref[prc-ex-\arabic{practice-no}:\arabic{practice-ex}]{\textbf{Задание \arabic{practice-ex}. } #1}\dotfill{\quad\pageref{prc-ex-\arabic{practice-no}:\arabic{practice-ex}}}}{}
+\newcommand{\PracticeHw}[1]{}
+
+\NewDocumentEnvironment{hidden-text}{m+b}{}{}
+

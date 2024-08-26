@@ -1,0 +1,128 @@
+%\newcounter{anything-no} % literally any thing
+\setcounter{anything-no}{0}
+
+%\newcounter{parthing-no} % thing in paragraph
+\setcounter{parthing-no}{1}
+
+%\newcounter{chapter-no}
+\setcounter{chapter-no}{\startchap}
+\setcounter{chapter}{\startchap}
+\renewcommand{\Chapter}[1]{
+		\stepcounter{chapter}
+		\stepcounter{chapter-no}
+		\setcounter{paragraph-no}{0}
+		\setcounter{parthing-no}{0}
+		\stepcounter{anything-no}
+		\phantomsection
+		\newpage\begin{center}
+			\LARGE
+			Глава \Roman{chapter-no}\\ #1
+		\end{center}
+		\label{any:\arabic{anything-no}}
+		\addcontentsline{toc}{chapter}{#1}
+}
+
+%\newcounter{paragraph-no}
+\setcounter{paragraph-no}{1}
+\renewcommand{\Paragraph}[1]{
+	\stepcounter{paragraph-no}
+	\setcounter{parthing-no}{0}
+	\stepcounter{anything-no}
+	\section{#1}
+	\label{any:\arabic{anything-no}}
+}
+
+\renewenvironment{defination}[1][]{
+	\stepcounter{parthing-no}
+	\stepcounter{anything-no}
+	\phantomsection
+	\ifx&#1&
+		\subsection{Определение}
+	\else
+		\subsection{Определение (#1)}
+	\fi
+	\label{any:\arabic{anything-no}}
+	\begin{mdframed}[leftline=true,rightline=false,linewidth=2pt,topline=false,bottomline=false,linecolor=black,innerleftmargin=10pt,innerrightmargin=0pt,skipabove=0pt,skipbelow=0pt]
+}{\end{mdframed}}
+
+\renewenvironment{subpar}[1]{
+	\stepcounter{parthing-no}
+	\stepcounter{anything-no}
+	\subsection{#1}
+	\label{any:\arabic{anything-no}}
+}{}
+
+\renewenvironment{theorem}[1][]{
+	\stepcounter{parthing-no}
+	\stepcounter{anything-no}
+	\ifx&#1&
+		\subsection{Теорема}
+	\else
+		\subsection{Теорема (#1)}
+	\fi
+	\label{any:\arabic{anything-no}}
+}{}
+\renewenvironment{th-base}{\begin{mdframed}[leftline=true,rightline=false,linewidth=2pt,topline=false,bottomline=false,linecolor=black,innerleftmargin=10pt,innerrightmargin=0pt,skipabove=0pt,skipbelow=0pt]}{\end{mdframed}}
+\renewenvironment{th-proof}[1][]{
+	\ifx&#1&
+	\subsubsection{Доказательство}
+	\else
+	\subsubsection{Доказательство (#1)}
+	\fi
+}{}
+\renewenvironment{th-example}[1][]{
+	\ifx&#1&
+	\subsubsection{Пример}
+	\else
+	\subsubsection{Пример (#1)}
+	\fi
+}{}
+\renewenvironment{th-props}[1][]{
+	\ifx&#1&
+	\subsubsection{Свойства}
+	\else
+	\subsubsection{Свойство (#1)}
+	\fi
+}{}
+\renewenvironment{th-so}[1][]{
+	\ifx&#1&
+	\subsubsection{Следствие}
+	\else
+	\subsubsection{Следствие (#1)}
+	\fi
+}{}
+
+% === PRACTICE ===
+\setcounter{practice-no}{0}
+\renewenvironment{practice}[2][]{
+	\stepcounter{practice-no}
+	\begin{center}
+		\LARGE
+		\ifx&#1&
+		Практика \Roman{practice-no}
+		\else
+		Практика \Roman{practice-no} (#1)
+		\fi
+		\\ #2
+	\end{center}
+	\setcounter{practice-sect}{0}
+	\setcounter{practice-ex}{0}
+}{\newpage}
+
+\renewcommand{\PracticeSection}[1]{
+	\stepcounter{practice-sect}
+	\phantomsection\label{prc-sect-\arabic{practice-no}:\arabic{practice-sect}}
+	\noindent\uline{\textbf{$\varnothing$\arabic{practice-sect}} \hfill \textbf{#1}}\\
+}
+\renewenvironment{practice-ex}[1]{
+	\stepcounter{practice-ex}
+	\phantomsection\label{prc-ex-\arabic{practice-no}:\arabic{practice-ex}}
+	\noindent\fbox{\textbf{$\varnothing$\arabic{practice-sect}. Задание \arabic{practice-ex}}} #1\\
+	
+	
+}{}
+\renewcommand{\PracticeHw}[1]{\begin{center}
+		\fbox{#1}
+\end{center}}
+
+\renewenvironment{hidden-text}{}{}

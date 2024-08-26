@@ -1,0 +1,72 @@
+% PS: \Chapter содержит \newpage. Учитывайте это.
+\Chapter{Анализ в метрических пространствах}
+
+\Paragraph{Метрические и векторные пространства}
+
+\begin{defination}[Метрическое пространство]
+	$X$ -- множество. Отображение $\rho: X \times X \to [0, +\infty)$
+	\begin{enumerate}
+		\item $\rho(x, y) = 0 \rla x = y$
+		\item $\rho(x,y) = \rho(y,x)$
+		\item $\rho(x,y) \le \rho(x,z) + \rho(z,y) \quad \forall x,y,z\in X$
+	\end{enumerate}
+	Тогда $(X,\rho)$ -- метрическое пространство.
+\end{defination}
+
+\begin{subpar}{Примеры метрик}
+	\begin{enumerate}
+		\item \textbf{Дискретная метрика (метрика лентяя).}
+		
+		\[ X\text{ -- произвольное множество, }\begin{cases}
+			\rho(x,y) = 0,&x=y\\
+			\rho(x,y)=1,&x\neq y
+		\end{cases} \]
+		
+		\item \textbf{Обычная метрика.} $X = \RR,\ \rho(x,y)=\abs{x-y}$
+	\end{enumerate}
+\end{subpar}
+
+\begin{defination}[Внутренность множества]
+	\[ \Int A := \left\{ a \in A \Big| a \text{ -- внутрення точка множества } A \right\} \]
+	
+	Пример: $(\RR, \abs{x-y})$, $A = [0;1]$, $\Int A = (0,1)$; $B = \{0\} \cup \{7\} \cup [1;5)$, $\Int B = (1,5)$.
+\end{defination}
+
+\begin{theorem}[Свойства внутренности множества]
+	\begin{th-base}
+		\begin{enumerate}
+			\item $\Int A \subset A$
+			\item $\Int A = \bigcup\limits_{\alpha \in I} A_\alpha, \quad \text{где }A_\alpha$ -- открытое подмножество $A$.
+			\item $\Int A$ -- открытое множество.
+			\item $\Int A = A \rla A$ -- открыто.
+		\end{enumerate}
+	\end{th-base}
+	\begin{th-proof}
+		\begin{enumerate}
+			\item Очевидно.
+			\item \fbox{$\subset$} $a \in \Int A \ra \exists r > 0\ B_r(a) \subset A \ra B_r(a) \subset \bigcup\limits_{\alpha\in I} A_\alpha$\\
+			\fbox{$\supset$} $a \in \bigcup\limits_{\alpha\in I} A_\alpha \ra \exists \beta:\ a \in A_\beta \ra \exists r\ B_r(a) \subset A_\beta \subset A \ra a \text{ -- внутренняя точка } A \ra a \in \Int A $
+			\item Следствие второго свойства и свойства открытых множеств.
+			\item \fbox{$\ra$} Так как $\Int A = A$ и $\Int A$ -- открыто, то и $A$ -- открыто.\\
+				\fbox{$\la$} $A$ -- открыто, $\Int A = \bigcup\limits_{\alpha \in I} A_\alpha$. Так как $A \subset A$, то
+				$\bigcup\limits_{\alpha \in I} A_\alpha \supset A$:
+				\[ \begin{cases}
+					\Int A \subset A\\
+					\Int A \supset A
+				\end{cases} \ra \Int A = A \] 
+		\end{enumerate}
+	\end{th-proof}
+	% NOTE: когда-нибудь я сделаю подстветку, как и у формулировокок. Поэтому
+	% можно будет потом писать это тупо через th-proof.
+	% Эх.......
+	\begin{th-so}[такие-то]
+		Следствия...
+	\end{th-so}
+	\begin{th-example}[секие-то]
+		Пример...
+	\end{th-example}
+\end{theorem}
+
+% PS${{ random.randint(1, 5) }}: тут нужно кучу newlineов добавить ибо я додик и без этого ломается
+% оглавнение. Между блоками \begin-\end тоже должны быть пустые строки.
+
